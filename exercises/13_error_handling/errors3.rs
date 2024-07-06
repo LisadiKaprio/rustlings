@@ -7,15 +7,17 @@
 // Execute `rustlings hint errors3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 use std::num::ParseIntError;
 
 fn main() {
     let mut tokens = 100;
     let pretend_user_input = "8";
+    tokens = handle_cost(tokens, pretend_user_input).unwrap();
+}
 
-    let cost = total_cost(pretend_user_input)?;
+pub fn handle_cost(tokens: i32, input: &str)  -> Result<i32, ParseIntError> {
+    let mut tokens = tokens;
+    let cost = total_cost(input)?;
 
     if cost > tokens {
         println!("You can't afford that many!");
@@ -23,8 +25,8 @@ fn main() {
         tokens -= cost;
         println!("You now have {} tokens.", tokens);
     }
+    Ok(tokens)
 }
-
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
@@ -32,3 +34,17 @@ pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
 
     Ok(qty * cost_per_item + processing_fee)
 }
+
+// the same as stuff above
+
+// pub fn total_cost(user_input: &str) -> Result<i32, ParseIntError> {
+//     let processing_fee = 1;
+//     let cost_per_item = 5;
+//     let input_result = user_input.parse::<i32>();
+    
+//     match input_result {
+//         Ok(quantity) => Ok(quantity * cost_per_item + processing_fee),
+//         Err(e) => Err(e)
+//     }
+// }
+

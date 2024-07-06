@@ -9,6 +9,7 @@ fn main() {
 
     let vec1 = fill_vec(vec0);
 
+    // assert_eq!(vec0, vec![22, 44, 66, 88]); won't work because `value borrowed here after move`
     assert_eq!(vec1, vec![22, 44, 66, 88]);
 }
 
