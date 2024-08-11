@@ -11,8 +11,6 @@
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -63,18 +61,24 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
+
     collection
-        .into_iter()
-        .map(|h| {
-            h.iter().fold(0, |sum_so_far, (_map_key, map_value)| {
-                if map_value == &value {
-                    sum_so_far + 1
-                } else {
-                    sum_so_far
-                }
-            })
-        })
+        .iter()
+        .map(|h| h.values().filter(|v| **v == value).count())
         .sum()
+
+    // collection
+    //     .into_iter()
+    //     .map(|h| {
+    //         h.iter().fold(0, |sum_so_far, (_map_key, map_value)| {
+    //             if map_value == &value {
+    //                 sum_so_far + 1
+    //             } else {
+    //                 sum_so_far
+    //             }
+    //         })
+    //     })
+    //     .sum()
 }
 
 #[cfg(test)]
